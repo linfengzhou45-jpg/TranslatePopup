@@ -16,12 +16,9 @@
 ### 方式一：下载预编译版本（推荐）
 
 1. 前往 [Releases](https://github.com/linfengzhou45-jpg/TranslatePopup/releases) 页面
-2. 下载最新版本的 `沉浸式翻译.app.zip`
+2. 下载最新版本的 `TranslatePopup.app.zip`
 3. 解压后将「沉浸式翻译.app」拖入「应用程序」文件夹
 4. 双击运行即可
-
-或者直接从 `releases` 目录下载：
-- [沉浸式翻译.app.zip](releases/沉浸式翻译.app.zip)
 
 ### 方式二：从源码编译
 
