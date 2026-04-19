@@ -16,7 +16,7 @@ final class SelectionMonitor {
 
     /// Debounce: ignore rapid-fire mouse-ups (e.g. double-click).
     private var lastTriggerTime: TimeInterval = 0
-    private static let debounceInterval: TimeInterval = 0.4
+    private static let debounceInterval: TimeInterval = 0.5
 
     /// Prevent re-entrancy while a translation is in-flight.
     private var isTranslating = false
@@ -89,23 +89,29 @@ final class SelectionMonitor {
             return
         }
         
+        // Debounce check
         guard now - lastTriggerTime > SelectionMonitor.debounceInterval else { return }
         lastTriggerTime = now
 
+        // Don't translate if already translating
         guard !isTranslating else { return }
 
+        // Check accessibility permission
+        guard AccessibilityHelper.isTrusted else { return }
+
         // Small delay lets the target app update its AX selection after mouse-up.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             self?.translateSelection()
         }
     }
 
     private func translateSelection() {
-        // Add a flag to prevent clipboard method from triggering another translation
+        // Double-check we're not already translating
         guard !isTranslating else { return }
         
-        // Try to get selected text (with clipboard fallback)
+        // Try to get selected text
         guard let text = AccessibilityHelper.selectedText(),
+              !text.isEmpty,
               text.count <= 5000 else {
             return
         }

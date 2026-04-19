@@ -13,11 +13,21 @@
 
 ## 🚀 安装
 
-### 方式一：从源码编译
+### 方式一：下载预编译版本（推荐）
+
+1. 前往 [Releases](https://github.com/linfengzhou45-jpg/TranslatePopup/releases) 页面
+2. 下载最新版本的 `沉浸式翻译.app.zip`
+3. 解压后将「沉浸式翻译.app」拖入「应用程序」文件夹
+4. 双击运行即可
+
+或者直接从 `releases` 目录下载：
+- [沉浸式翻译.app.zip](releases/沉浸式翻译.app.zip)
+
+### 方式二：从源码编译
 
 ```bash
 # 克隆仓库
-git clone https://github.com/你的用户名/TranslatePopup.git
+git clone https://github.com/linfengzhou45-jpg/TranslatePopup.git
 cd TranslatePopup
 
 # 编译
@@ -25,16 +35,6 @@ swiftc -o TranslatePopup Sources/*.swift -framework Cocoa -framework Application
 
 # 运行
 ./TranslatePopup
-```
-
-### 方式二：设置开机自启动
-
-```bash
-# 运行安装脚本
-./install.sh
-
-# 或手动加载 LaunchAgent
-launchctl load ~/Library/LaunchAgents/com.user.translatetranslate.plist
 ```
 
 ## 📋 系统要求

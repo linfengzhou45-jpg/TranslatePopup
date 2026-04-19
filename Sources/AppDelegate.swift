@@ -9,6 +9,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private let monitor = SelectionMonitor()
     private var isEnabled = true
+    private var hasPromptedForPermission = false
 
     // MARK: - NSApplicationDelegate
 
@@ -79,7 +80,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         rebuildMenu()
     }
 
-    @objc    private func checkPermissions() {
+    @objc private func checkPermissions() {
         if AccessibilityHelper.isTrusted {
             showPermissionAlert(
                 title: "辅助功能权限",
@@ -101,6 +102,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func quit() {
+        // Stop monitoring first
+        monitor.stop()
+        
+        // Terminate the app
         NSApp.terminate(nil)
     }
 
@@ -110,7 +115,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if AccessibilityHelper.isTrusted {
             startMonitorIfNeeded()
         } else {
-            AccessibilityHelper.requestTrust()
+            // Only prompt once per session
+            if !hasPromptedForPermission {
+                hasPromptedForPermission = true
+                AccessibilityHelper.requestTrust()
+            }
             // Poll until the user grants access.
             pollForAccessibility()
         }
