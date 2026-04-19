@@ -1,0 +1,40 @@
+# Compiled binary
+TranslatePopup
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotbackup
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
