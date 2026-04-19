@@ -101,6 +101,10 @@ final class SelectionMonitor {
     }
 
     private func translateSelection() {
+        // Add a flag to prevent clipboard method from triggering another translation
+        guard !isTranslating else { return }
+        
+        // Try to get selected text (with clipboard fallback)
         guard let text = AccessibilityHelper.selectedText(),
               text.count <= 5000 else {
             return
